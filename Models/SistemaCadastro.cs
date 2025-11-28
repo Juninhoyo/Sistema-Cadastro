@@ -38,6 +38,21 @@ namespace SistemaCadastroPessoa.Models
             Console.WriteLine("Entrada inválida! Tente novamente.");     
          }   
         }
+    private string LerEmail(string menssagem)
+        {
+            string email;
+
+            do
+            {
+                Console.WriteLine(menssagem);
+                email = Console.ReadLine()!;
+
+                if (string.IsNullOrEmpty(email) || !email.Contains("@") && !email.Contains("."))
+                    Console.WriteLine("Entrada inválida! Tente novamente.");
+            } 
+            while (string.IsNullOrEmpty(email) || !email.Contains("@"));
+            return email;
+        }
     public void CadastrarPessoa()
         {
             Pessoa p = new Pessoa();
@@ -48,8 +63,7 @@ namespace SistemaCadastroPessoa.Models
 
             p.Idade = LerInteiro("Digite a sua Idade: ");
 
-            Console.WriteLine("Digite o Email da Pessoa: ");
-            p.Email = Console.ReadLine()!;
+            p.Email = LerEmail("Digite o seu Email: ");
 
             pessoas.Add(p);
             Console.WriteLine("Pessoa cadastrada com sucesso! Pressione Enter para continuar...");
